@@ -7,6 +7,9 @@ code_type = "utf-8"
 url = "recipes.txt"
 cook_book = {}
 
+shop_list_by_dishes = {}
+order_list = ['Запеченный картофель', 'Омлет']
+
 
 def create_cookbook(url, code_type):
     cook_book = {}
@@ -38,3 +41,13 @@ def create_cookbook(url, code_type):
             cook_book[dish_name] = (dish_ingredients_list.copy())
 
         return cook_book
+
+def get_shop_list_by_dishes(dishes, person_count, cook_book):
+    for dish in dishes:
+        for ingredient in cook_book.get(dish):
+            shop_list_by_dishes[ingredient.get('ingredient_name')] = {'measure': ingredient.get('measure'), 'quantity': ingredient.get('quantity') * person_count }
+    return shop_list_by_dishes
+
+
+
+pprint(get_shop_list_by_dishes(order_list, 2, create_cookbook(url, code_type)))
